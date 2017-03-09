@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GreenDAOTest</string>
+    <string name="date">yyyy年MM月dd日HH:mm:ss</string>
+</resources>
