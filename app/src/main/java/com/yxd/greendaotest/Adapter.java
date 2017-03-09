@@ -102,15 +102,12 @@ public class Adapter extends BaseAdapter implements Filterable{
                 ArrayList<User> newValues = new ArrayList<User>(count);
 
                 for (int i = 0; i < count; i++) {
-                    User pc = unfilteredValues.get(i);
-                    if (pc != null) {
-
-                        if(pc.getName()!=null && pc.getName().startsWith(prefixString)){
-
-                            newValues.add(pc);
-                        }else if(pc.getSex()!=null && pc.getSex().startsWith(prefixString)){
-
-                            newValues.add(pc);
+                    User user = unfilteredValues.get(i);
+                    if (user != null) {
+                        if(user.getName()!=null && user.getName().toLowerCase().startsWith(prefixString)){
+                            newValues.add(user);
+                        }else if(user.getSex()!=null && user.getSex().toLowerCase().startsWith(prefixString)){
+                            newValues.add(user);
                         }
                     }
                 }
