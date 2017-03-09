@@ -10,8 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yxd.greendaotest.gen.UserDao;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
     private EditText etAge;
     private EditText etSex;
     private Button btSubmit;
+    private AutoCompleteTextView tvSearch;
     private RecyclerView mRecyclerView;
     private RxDao<User, Long> userDao;
     private RxQuery<User> userRxQuery;
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity{
     private Observable<CharSequence> ageObservable;
     private Observable<CharSequence> sexObservable;
     private ItemTouchHelper mItemTouchHelper;
+    private Adapter itemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,8 @@ public class MainActivity extends AppCompatActivity{
         etAge = (EditText) findViewById(R.id.et_age);
         etSex = (EditText) findViewById(R.id.et_sex);
         btSubmit = (Button) findViewById(R.id.bt_submit);
+        tvSearch = (AutoCompleteTextView) findViewById(R.id.tv_search);
+        tvSearch.setThreshold(1);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
         if (mAdapter == null){
             mAdapter = new UsersAdapter(onItemDeletListener);
@@ -169,6 +176,8 @@ public class MainActivity extends AppCompatActivity{
                     @Override
                     public void call(List<User> users) {
                         mAdapter.setUsers(users);
+                        itemAdapter = new Adapter(MainActivity.this, users);
+                        tvSearch.setAdapter(itemAdapter);
                     }
                 });
     }
