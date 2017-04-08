@@ -1,0 +1,1 @@
+a sample for GreenDAO
